@@ -3,7 +3,6 @@ from PIL import Image
 from PIL import ImageDraw
 import pytesseract
 import cv2 as cv
-face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
 ######################
 ##### Functions ######
 ######################
@@ -110,8 +109,10 @@ def search(values, searchFor):
 #####################################
 #
 # Initialize the list of texts extracted from newspapers to search faces
+# add to the file name the path to that file, e.g "home/yourname/images.zip"
 #
-mizip = zipfile.ZipFile("/home/werner/Desktop/Varios/images.zip", mode='r') 
+face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
+mizip = zipfile.ZipFile("images.zip", mode='r') 
 Newspapers = maketextdict(mizip)
 #
 # Substitute the second value of the search
