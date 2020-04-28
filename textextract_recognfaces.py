@@ -19,10 +19,11 @@ def binarize(image_to_transform, threshold):
                 output_image.putpixel( (x,y), 255 )
     #now we just return the new image
     return output_image
-# The newspaper texts should be extracted and saved for any future word search
-# If a text file with the newspaper text is found omit the extraction
-# But if there is no text file, proceed to extract text and save it to a txt file
+#
 def maketextdict(mizipo):
+    """The newspaper texts should be extracted and saved for any future word search
+    If a text file with the newspaper text is found omit the extraction
+    But if there is no text file, proceed to extract text and save it to a txt file"""
     Texts = {}
     for foto in mizipo.namelist():     
         file = str(foto) +".txt"
@@ -46,6 +47,8 @@ def maketextdict(mizipo):
     return Texts
 #
 def makeImagedict(what =[]):
+    """ Extract the faces from the newspaper pages and store them in a dictionary with the format {"file1.png":[face1, face2],
+    "file2.png":[face1, face2],...}"""
     facesdict = {}
     for name in what:
         facesdict[name] = []
@@ -65,6 +68,7 @@ def makeImagedict(what =[]):
     return facesdict
 
 def Contact_sheet(facesdict ={}):
+    """ make a presentation of the faces found related to the keyword searched"""
     for name in facesdict.keys():
         if facesdict[name] == []:
             print("\nResults found in {}\nBut no faces were found in that file\n".format(name))
@@ -87,13 +91,12 @@ def Contact_sheet(facesdict ={}):
                     x=0
                     y=y+largest_y
                 else:
-                    x=x+largest_x
-        
+                    x=x+largest_x      
             # resize and display contact sheet
             contact_sheet = contact_sheet.resize((int(contact_sheet.width/2),int(contact_sheet.height/2) ))
             display(contact_sheet)
-
-        
+#
+#       
 def search(values, searchFor):
     lista = []
     for k in values:
